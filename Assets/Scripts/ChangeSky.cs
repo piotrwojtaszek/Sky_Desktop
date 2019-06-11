@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeSky : MonoBehaviour
 {
 
-    [SerializeField] private Material sky;
+    public Material sky;
     [SerializeField] private Texture[] images;
     private int currentImage;
  
@@ -18,7 +18,7 @@ public class ChangeSky : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LoadNext();
+        
         
     }
 
@@ -38,7 +38,6 @@ public class ChangeSky : MonoBehaviour
                     currentImage = 0;
                 }
                 sky.mainTexture = images[currentImage];
-            
         }
     }
 }
