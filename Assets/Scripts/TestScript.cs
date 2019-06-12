@@ -8,13 +8,20 @@ public class TestScript : MonoBehaviour
     GameObject cam;
     CameraProperties cp;
     public Texture texture;
+    public Transform centerPoint;
+    [Range(0f,5f)]public float rotateAngle;
+    private float oldRotateAngle;
     void Start()
     {
         cp = GameObject.FindGameObjectWithTag("GM").GetComponent<CameraProperties>();
+        
+
     }
     // Start is called before the first frame update
     void Update()
     {
+        
+
         cam = cp.camera;
         float distance = Vector3.Distance(this.transform.position,cam.transform.position);
         
@@ -37,12 +44,24 @@ public class TestScript : MonoBehaviour
         {
             ChangeSkybox();
         }
+
+        RotateAround();
     }
 
     void ChangeSkybox()
     {
         ChangeSky skyChange = GameObject.FindGameObjectWithTag("GM").GetComponent<ChangeSky>();
         skyChange.sky.mainTexture = texture;
+    }
+
+    void RotateAround()
+    {
+        if(oldRotateAngle != rotateAngle)
+        {
+            transform.RotateAround(centerPoint.position, Vector3.up, rotateAngle);
+        }
+
+        oldRotateAngle = rotateAngle;
     }
 
 
