@@ -24,7 +24,7 @@ public class CameraRotate : MonoBehaviour
         {
             yaw -= speed.x * Input.GetAxis("Mouse X");
             pitch += speed.y * Input.GetAxis("Mouse Y");
-            pitch = Mathf.Clamp(pitch, -90f, 90f);
+            pitch = Mathf.Clamp(pitch, -90f, 40f);
             transform.eulerAngles = new Vector3(pitch, yaw, 0f);
         }
     }

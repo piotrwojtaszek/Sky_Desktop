@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SecondTest : MonoBehaviour
 {
-    public Transform center;
     public Texture texture;
     // Start is called before the first frame update
     void Start()

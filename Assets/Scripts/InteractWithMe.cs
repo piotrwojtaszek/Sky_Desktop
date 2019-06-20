@@ -12,10 +12,11 @@ public class InteractWithMe : MonoBehaviour
     [TextArea] public string myText;
     EventSystem m_EventSystem;
     private Renderer renderer;
+    public Transform textPosRef;
 
     void OnEnable()
     {
-        buttonPanel.gameObject.SetActive(true);
+        
         m_EventSystem = EventSystem.current;
         renderer = GetComponent<Renderer>();
 
@@ -33,16 +34,23 @@ public class InteractWithMe : MonoBehaviour
     {
         if (renderer.isVisible)
         {
-            Vector3 namePos = Camera.main.WorldToScreenPoint(this.transform.position);
-            textPanel.transform.position = namePos;
-            buttonPanel.transform.position = namePos;
+            Vector3 textPos = Camera.main.WorldToScreenPoint(textPosRef.position);
+            Vector3 buttonPos = Camera.main.WorldToScreenPoint(this.transform.position);
+            textPanel.transform.position = textPos;
+            buttonPanel.transform.position = buttonPos;
+            buttonPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            buttonPanel.gameObject.SetActive(false);
+            DisableText();
         }
 
 
 
         //buttonPanel.transform.position = new Vector3(buttonPanel.transform.position.x, buttonPanel.transform.position.y, Mathf.Clamp(buttonPanel.transform.position.z, 0f, 6f));
 
-        if (GetMeTag(m_EventSystem) == "InfoText")
+        if (GetMeTag(m_EventSystem) == buttonPanel.name)
         {
             if (textPanel.gameObject.activeSelf == false)
             {

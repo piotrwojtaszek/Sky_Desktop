@@ -57,14 +57,14 @@ public class ButtonDetecting : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             hitMaterial = hit.transform.gameObject.GetComponent<Renderer>();
-            hitMaterial.material.color = new Color(1f, 1f, 1f, 0.5f);
+            hitMaterial.material.color = new Color(1f, 1f, 1f, 0.7f);
         }
         else
         {
             if(hitMaterial != null)
             {
                 
-                hitMaterial.material.color = new Color(1f, 1f, 1f, 0.2f);
+                hitMaterial.material.color = new Color(1f, 1f, 1f, 0.35f);
             }
         }
     }
