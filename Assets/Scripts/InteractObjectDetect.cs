@@ -14,19 +14,23 @@ public class InteractObjectDetect : MonoBehaviour
 
     void Active()
     {
-        if (Camera.main.transform.position == center.position)
+        if(Camera.main != null)
         {
-            foreach (Transform child in transform)
+            if (Camera.main.transform.position == center.position)
             {
-                child.gameObject.SetActive(true);
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
             }
         }
-        else
-        {
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(false);
-            }
-        }
+        
     }
 }

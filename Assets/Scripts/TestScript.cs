@@ -8,27 +8,31 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        float distance = Vector3.Distance(this.transform.position, Camera.main.transform.position);
-
-        if (this.transform.position == Camera.main.transform.position || distance > 1f)
+        if(Camera.main != null)
         {
+            float distance = Vector3.Distance(this.transform.position, Camera.main.transform.position);
 
-            foreach (Transform child in transform)
+            if (this.transform.position == Camera.main.transform.position || distance > 1f)
             {
-                child.gameObject.SetActive(false);
+
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+            if (this.transform.position == Camera.main.transform.position)
+            {
+                ChangeSkybox();
             }
         }
-        else
-        {
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(true);
-            }
-        }
-        if (this.transform.position == Camera.main.transform.position)
-        {
-            ChangeSkybox();
-        }
+        
 
 
     }

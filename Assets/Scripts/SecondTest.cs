@@ -30,38 +30,42 @@ public class SecondTest : MonoBehaviour
 
     void CheckForCam()
     {
-        float distance = Vector3.Distance(this.transform.position, Camera.main.transform.position);
-
-        if (this.transform.position == Camera.main.transform.position)
+        if(Camera.main != null)
         {
+            float distance = Vector3.Distance(this.transform.position, Camera.main.transform.position);
 
-            foreach (Transform child in transform)
+            if (this.transform.position == Camera.main.transform.position)
             {
-                if (child.tag == "NextPoint")
+
+                foreach (Transform child in transform)
+                {
+                    if (child.tag == "NextPoint")
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                }
+            }
+            else if (distance > 1f)
+            {
+
+                foreach (Transform child in transform)
                 {
                     child.gameObject.SetActive(false);
                 }
             }
-        }
-        else if (distance > 1f)
-        {
-
-            foreach (Transform child in transform)
+            else
             {
-                child.gameObject.SetActive(false);
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+            if (this.transform.position == Camera.main.transform.position)
+            {
+                ChangeSkybox();
             }
         }
-        else
-        {
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(true);
-            }
-        }
-        if (this.transform.position == Camera.main.transform.position)
-        {
-            ChangeSkybox();
-        }
+        
     }
 
     void OnDrawGizmos()
