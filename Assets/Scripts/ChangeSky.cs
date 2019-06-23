@@ -26,7 +26,7 @@ public class ChangeSky : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Load_Image");
+            //Debug.Log("Load_Image");
 
                 currentImage++;
                 if (currentImage < 0)

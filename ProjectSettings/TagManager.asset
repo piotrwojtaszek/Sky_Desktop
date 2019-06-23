@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GM
   - NextPoint
+  - InteractAble
+  - ShowText
   layers:
   - Default
   - TransparentFX

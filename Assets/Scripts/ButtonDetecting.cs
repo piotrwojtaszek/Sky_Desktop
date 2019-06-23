@@ -6,6 +6,8 @@ public class ButtonDetecting : MonoBehaviour
 {
     Camera cam;
     Renderer hitMaterial;
+    InteractWithMe interact;
+    bool isFocused;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,7 @@ public class ButtonDetecting : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 //Transform objectHit = hit.transform;
-                Debug.Log(hit.transform.name);
+               // Debug.Log(hit.transform.name);
                 Move(hit);
             }
         }
@@ -67,5 +69,24 @@ public class ButtonDetecting : MonoBehaviour
                 hitMaterial.material.color = new Color(1f, 1f, 1f, 0.2f);
             }
         }
+
+       /* if (Physics.Raycast(ray, out hit))
+        {
+            interact = hit.collider.GetComponent<InteractWithMe>();
+            if (hit.collider.tag == "InteractAble")
+            {
+                    interact.DisplayText();
+                    isFocused = true;
+
+            }
+
+        }
+        else
+        {
+            if (hit.collider.tag != "InteractAble")
+            {
+                interact.DisablePanel();
+            }
+        }*/
     }
 }

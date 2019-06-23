@@ -4,31 +4,47 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-    
-    GameObject cam;
-    CameraProperties cp;
     public Texture texture;
-    public Transform centerPoint;
-    [Range(0f,5f)]public float rotateAngle;
-    private float oldRotateAngle;
+    // Start is called before the first frame update
     void Start()
     {
-        cp = GameObject.FindGameObjectWithTag("GM").GetComponent<CameraProperties>();
-        
 
     }
-    // Start is called before the first frame update
+
+    // Update is called once per frame
     void Update()
     {
-        
 
-        cam = cp.camera;
-        float distance = Vector3.Distance(this.transform.position,cam.transform.position);
-        
-        if (this.transform.position == cam.transform.position || distance>1f )
+       
+        CheckForCam();
+
+    }
+
+    void ChangeSkybox()
+    {
+        ChangeSky skyChange = GameObject.FindGameObjectWithTag("GM").GetComponent<ChangeSky>();
+        skyChange.sky.mainTexture = texture;
+    } 
+
+    void CheckForCam()
+    {
+        float distance = Vector3.Distance(this.transform.position, Camera.main.transform.position);
+
+        if (this.transform.position == Camera.main.transform.position)
         {
-            
-            foreach(Transform child in transform)
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "NextPoint")
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
+        else if (distance > 1f)
+        {
+
+            foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(false);
             }
@@ -40,29 +56,15 @@ public class TestScript : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
         }
-        if(this.transform.position == cam.transform.position)
+        if (this.transform.position == Camera.main.transform.position)
         {
             ChangeSkybox();
         }
-
-        RotateAround();
     }
 
-    void ChangeSkybox()
+    void OnDrawGizmos()
     {
-        ChangeSky skyChange = GameObject.FindGameObjectWithTag("GM").GetComponent<ChangeSky>();
-        skyChange.sky.mainTexture = texture;
+        Gizmos.DrawWireSphere(this.transform.position, 1f);
     }
-
-    void RotateAround()
-    {
-        if(oldRotateAngle != rotateAngle)
-        {
-            transform.RotateAround(centerPoint.position, Vector3.up, rotateAngle);
-        }
-
-        oldRotateAngle = rotateAngle;
-    }
-
 
 }
