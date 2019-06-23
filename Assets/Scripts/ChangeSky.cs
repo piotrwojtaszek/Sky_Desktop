@@ -9,6 +9,7 @@ public class ChangeSky : MonoBehaviour
     private int currentImage;
     public GameObject startPanel;
     public Camera cam;
+    public GameObject pauseMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,15 @@ public class ChangeSky : MonoBehaviour
         cam.GetComponent<CameraRotate>().enabled = false;
         cam.GetComponent<ButtonDetecting>().enabled = false;
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            cam.GetComponent<CameraRotate>().enabled = false;
+            cam.GetComponent<ButtonDetecting>().enabled = false;
+            pauseMenu.SetActive(true);
+        }
+        
+    }
 
 }
